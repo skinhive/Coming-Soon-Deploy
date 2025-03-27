@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/subscribe",
+      "lambdaFunction": "subscribe",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/subscribe"
+    }
+  ],
+  "resourceName": "skinhiveapi",
+  "apiName": "skinhiveapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "subscribe"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-skinhiveapi-dev-123456-authRole",
+    "unAuthRoleName": "amplify-skinhiveapi-dev-123456-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "subscribe",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+} 

@@ -1,0 +1,17 @@
+{
+  "name": "skinhive-coming-soon",
+  "version": "1.0.0",
+  "description": "SKINHIVE Coming Soon Page",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx serve",
+    "build": "echo 'No build step needed for static site'"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}

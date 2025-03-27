@@ -1,0 +1,10 @@
+{
+  "name": "subscribe-function",
+  "version": "1.0.0",
+  "description": "AWS Lambda function for Mailchimp subscription",
+  "main": "index.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "crypto": "^1.0.1"
+  }
+} 

@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "mailchimpApiKey",
+      "environmentVariableName": "MAILCHIMP_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "mailchimpListId",
+      "environmentVariableName": "MAILCHIMP_LIST_ID"
+    }
+  ]
+} 

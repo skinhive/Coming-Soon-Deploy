@@ -1,0 +1,50 @@
+{
+  "api": {
+    "skinhiveapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "subscribe"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "subscribe": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "lastPushTimeStamp": "2023-03-27T00:00:00.000Z",
+      "service": "amplifyhosting",
+      "type": "cicd"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_subscribe_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscribe"
+        }
+      ]
+    },
+    "AMPLIFY_function_subscribe_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "subscribe"
+        }
+      ]
+    }
+  }
+} 
