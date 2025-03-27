@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkinHive - Coming Soon</title>
     <link rel="icon" href="images/skinhive-logo.svg" type="image/svg+xml">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -74,34 +73,9 @@
             background-color: rgba(255, 215, 0, 0.1);
         }
 
-        /* Hexagon background */
+        /* Static hexagon background - hidden by default */
         .hexagon-background {
-            display: none; /* Hide the hexagon background instead of removing it completely */
-        }
-
-        .hexagon-container {
-            display: none; /* Hide the hexagon container */
-        }
-
-        .hexagon {
-            display: none; /* Hide all hexagons */
-        }
-
-        .hexagon:before,
-        .hexagon:after {
-            display: none; /* Hide hexagon pseudo-elements */
-        }
-
-        .hexagon.active {
-            display: none; /* Hide active hexagons */
-        }
-
-        .hexagon.active:before {
-            display: none; /* Hide active hexagon pseudo-elements */
-        }
-
-        .hexagon.active:after {
-            display: none; /* Hide active hexagon pseudo-elements */
+            display: none;
         }
 
         .background-container {
@@ -305,6 +279,7 @@
             </div>
         </div>
     </nav>
+    <!-- Hexagon background is now hidden via CSS -->
     <div class="hexagon-background" style="display: none;">
         <div class="hexagon-container" id="hexagon-container"></div>
     </div>
@@ -374,7 +349,7 @@
             }, 5000);
         }
 
-        document.getElementById('email-form').addEventListener('submit', async function(e) {
+        document.getElementById('email-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const form = this;
@@ -389,43 +364,24 @@
             buttonText.style.opacity = '0';
             spinner.style.display = 'block';
 
-            try {
-                // Replace with your AWS API Gateway endpoint - will need to be updated after deployment
-                const apiEndpoint = 'https://YOUR_API_ID.execute-api.YOUR_REGION.amazonaws.com/YOUR_STAGE/subscribe';
-                
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: input.value })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    showNotification('Thank you for joining the HIVE! Check your email to confirm your subscription.', 'success');
-                    form.reset();
-                } else {
-                    throw new Error(data.message || 'Failed to subscribe. Please try again.');
-                }
-            } catch (error) {
-                showNotification(error.message, 'error');
-            } finally {
-                // Re-enable form
+            // Store the email locally (could be enhanced later with actual backend)
+            const email = input.value;
+            console.log('Email submitted:', email);
+            
+            // Show success message
+            showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+            form.reset();
+            
+            // Re-enable form
+            setTimeout(() => {
                 input.disabled = false;
                 button.disabled = false;
                 buttonText.style.opacity = '1';
                 spinner.style.display = 'none';
-            }
+            }, 1000);
         });
 
-        // Hexagon background - disabled
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hexagon animation code removed
-            
-            // You can still add other DOMContentLoaded code here if needed
-        });
+        // No more hexagon animation code - completely removed for simplicity
     </script>
 </body>
 </html> 
