@@ -1,0 +1,9 @@
+{
+  "name": "skinhive-minimal",
+  "version": "1.0.0",
+  "description": "SKINHIVE Minimal Coming Soon Page",
+  "scripts": {
+    "start": "echo Starting",
+    "build": "echo No build needed"
+  }
+} 

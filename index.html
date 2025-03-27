@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinHive - Coming Soon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input {
+            padding: 12px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(45deg, #ffd700, #ffaa00);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SKINHIVE</h1>
+        <p>We're launching soon. Join our mailing list to get notified.</p>
+        <form class="email-form" id="email-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Get Notified</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('email-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for subscribing! We will notify you when we launch.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html> 
