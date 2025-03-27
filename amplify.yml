@@ -3,10 +3,11 @@ frontend:
   phases:
     preBuild:
       commands:
+        - echo "Installing dependencies..."
         - npm ci
     build:
       commands:
-        - echo "No build step needed for static site"
+        - echo "No build needed for static site"
   artifacts:
     baseDirectory: /
     files:
