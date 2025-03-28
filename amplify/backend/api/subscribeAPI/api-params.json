@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/subscribe",
+      "lambdaFunction": "subscribeEmail",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/subscribe"
+    }
+  ],
+  "resourceName": "subscribeAPI",
+  "apiName": "subscribeAPI",
+  "functionArns": [
+    {
+      "lambdaFunction": "subscribeEmail"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-comingsoondeploy-dev-124859-authRole",
+    "unAuthRoleName": "amplify-comingsoondeploy-dev-124859-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "subscribeEmail",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+} 

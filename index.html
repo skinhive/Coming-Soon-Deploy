@@ -379,8 +379,11 @@
                 console.log('Local storage fallback failed:', e);
             }
             
-            // Submit to Netlify function
-            fetch('/.netlify/functions/subscribe', {
+            // API endpoint - will need to be updated with your actual API endpoint after deployment
+            const apiEndpoint = '/api/subscribe';
+            
+            // Submit to API
+            fetch(apiEndpoint, {
                 method: 'POST',
                 body: JSON.stringify({ email }),
                 headers: {

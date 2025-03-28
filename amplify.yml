@@ -1,23 +1,22 @@
 version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - amplifyPush --simple
 frontend:
   phases:
     preBuild:
       commands:
-        - echo "Installing dependencies..."
         - npm install
     build:
       commands:
-        - echo "Setting up Netlify functions..."
-        - mkdir -p .netlify/functions/subscribe
-        - cp -r netlify/functions/subscribe/* .netlify/functions/subscribe/
-        - cd .netlify/functions/subscribe && npm install && cd ../../..
-        - echo "Build completed"
+        - echo "AWS Amplify build with Lambda functions"
   artifacts:
     baseDirectory: /
     files:
       - "**/*"
-      - ".netlify/**/*"
   cache:
     paths:
       - node_modules/**/*
-      - .netlify/functions/subscribe/node_modules/**/*
+      - amplify/.config/**/*

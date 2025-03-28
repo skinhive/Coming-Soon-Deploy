@@ -1,6 +1,6 @@
 {
   "api": {
-    "skinhiveapi": {
+    "subscribeAPI": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "subscribe"
+          "resourceName": "subscribeEmail"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -16,7 +16,7 @@
     }
   },
   "function": {
-    "subscribe": {
+    "subscribeEmail": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -30,19 +30,19 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_subscribe_deploymentBucketName": {
+    "AMPLIFY_function_subscribeEmail_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "subscribe"
+          "resourceName": "subscribeEmail"
         }
       ]
     },
-    "AMPLIFY_function_subscribe_s3Key": {
+    "AMPLIFY_function_subscribeEmail_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "subscribe"
+          "resourceName": "subscribeEmail"
         }
       ]
     }
