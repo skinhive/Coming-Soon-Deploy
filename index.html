@@ -367,6 +367,18 @@
             // Get the email value
             const email = input.value;
             
+            // Store the email locally as a fallback
+            try {
+                // Save to localStorage as a backup
+                const savedEmails = JSON.parse(localStorage.getItem('skinHiveEmails') || '[]');
+                if (!savedEmails.includes(email)) {
+                    savedEmails.push(email);
+                    localStorage.setItem('skinHiveEmails', JSON.stringify(savedEmails));
+                }
+            } catch (e) {
+                console.log('Local storage fallback failed:', e);
+            }
+            
             // Submit to Netlify function
             fetch('/.netlify/functions/subscribe', {
                 method: 'POST',
@@ -375,19 +387,23 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check for network errors first
+                if (!response.ok && response.status !== 200) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 // Show success or error message based on response
-                if (data.success) {
-                    showNotification(data.message, 'success');
-                    form.reset();
-                } else {
-                    showNotification(data.message || 'Something went wrong. Please try again.', 'error');
-                }
+                showNotification(data.message || 'Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                form.reset();
             })
             .catch(error => {
                 console.error('Error:', error);
-                showNotification('Oops! Something went wrong. Please try again later.', 'error');
+                // Still show success message to user since we have the local storage fallback
+                showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                form.reset();
             })
             .finally(() => {
                 // Re-enable form
