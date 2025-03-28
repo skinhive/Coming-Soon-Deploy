@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SkinHive - Coming Soon</title>
     <link rel="icon" href="images/skinhive-logo.svg" type="image/svg+xml">
     <!-- Add Formspree's AJAX library -->
@@ -142,6 +142,8 @@
             color: white;
             border-radius: 4px 0 0 4px;
             font-size: 1rem;
+            -webkit-appearance: none; /* Fix for iOS styling */
+            appearance: none;
         }
 
         .signup-form input::placeholder {
@@ -164,6 +166,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            -webkit-appearance: none; /* Fix for iOS styling */
+            appearance: none;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
         }
 
         .signup-form button:disabled {
@@ -227,6 +232,9 @@
             display: flex;
             gap: 15px;
             z-index: 10;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            max-width: 300px;
         }
 
         .social-icon {
@@ -244,6 +252,7 @@
         @media (max-width: 768px) {
             .background-image {
                 max-width: 95%;
+                max-height: 80%; /* Reduce height on mobile */
             }
             .nav-links {
                 gap: 10px;
@@ -255,6 +264,8 @@
             .signup-form {
                 flex-direction: column;
                 gap: 10px;
+                width: 90%; /* Adjust width on mobile */
+                margin: 0 auto;
             }
             .signup-form input,
             .signup-form button {
@@ -269,6 +280,57 @@
             .social-icon {
                 width: 20px;
                 height: 20px;
+            }
+            .signup-container {
+                height: auto; /* Auto height instead of fixed on mobile */
+                padding: 15px 0;
+            }
+            .background-container {
+                height: calc(100vh - 120px); /* Adjust for auto height footer */
+                align-items: center; /* Center vertically on mobile */
+            }
+        }
+        
+        /* Additional small screen media query */
+        @media (max-width: 480px) {
+            .background-image {
+                max-width: 100%;
+                max-height: 70%;
+            }
+            .nav-logo {
+                font-size: 1.3rem;
+            }
+            .signup-form {
+                width: 95%;
+            }
+            .notification {
+                width: 90%;
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            .social-icons {
+                right: 15px;
+                gap: 10px;
+                flex-wrap: wrap;
+                width: 120px;
+                justify-content: flex-end;
+            }
+            .social-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        
+        /* Fix for very small screens */
+        @media (max-height: 600px) {
+            .background-container {
+                height: calc(100vh - 110px);
+            }
+            .background-image {
+                max-height: 60%;
+            }
+            .signup-container {
+                padding: 10px 0;
             }
         }
     </style>
