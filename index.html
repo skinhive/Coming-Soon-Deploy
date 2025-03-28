@@ -299,7 +299,7 @@
                 <!-- Add hidden honeypot field to prevent spam -->
                 <input type="text" name="_gotcha" style="display:none">
                 <!-- Add return URL so user stays on the site -->
-                <input type="hidden" name="_next" value="https://no-anime.d23jq8ipd3abc.amplifyapp.com/?submitted=true">
+                <input type="hidden" name="_next" value="https://no-anime.d23jq8ipd3abc.amplifyapp.com?thanks=true">
             </form>
         </div>
         <div class="social-icons">
@@ -358,7 +358,7 @@
         // Check for submitted parameter and show success message
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('submitted') === 'true') {
+            if (urlParams.get('submitted') === 'true' || urlParams.get('thanks') === 'true') {
                 showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
                 // Remove the parameter from URL without refreshing the page
                 const newUrl = window.location.pathname;
