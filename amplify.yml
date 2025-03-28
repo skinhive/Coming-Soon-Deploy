@@ -1,22 +1,10 @@
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        - amplifyPush --simple
 frontend:
   phases:
-    preBuild:
-      commands:
-        - npm install
     build:
       commands:
-        - echo "AWS Amplify build with Lambda functions"
+        - echo "Building static site"
   artifacts:
     baseDirectory: /
     files:
-      - "**/*"
-  cache:
-    paths:
-      - node_modules/**/*
-      - amplify/.config/**/*
+      - '**/*'
