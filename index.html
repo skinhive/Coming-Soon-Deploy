@@ -288,8 +288,8 @@
     </div>
     <div class="signup-container">
         <div class="signup-content">
-            <form class="signup-form" id="email-form">
-                <input type="email" placeholder="Enter your email to be first in the HIVE" required>
+            <form class="signup-form" id="email-form" action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email to be first in the HIVE" required>
                 <button type="submit">
                     <span class="button-text">Get Notified</span>
                     <span class="spinner"></span>
@@ -379,48 +379,30 @@
                 console.log('Local storage fallback failed:', e);
             }
             
-            // API endpoint - will need to be updated with your actual API endpoint after deployment
-            const apiEndpoint = '/api/subscribeAPI/subscribe';
+            // Get form action (Formspree URL)
+            const action = form.getAttribute('action');
+            const method = form.getAttribute('method') || 'POST';
             
-            // Submit to API
-            fetch(apiEndpoint, {
-                method: 'POST',
-                body: JSON.stringify({ email }),
+            // Submit the form to Formspree
+            fetch(action, {
+                method: method,
+                body: new FormData(form),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 }
             })
             .then(response => {
-                // Check for network errors first
-                if (!response.ok && response.status !== 200) {
-                    throw new Error(`Network response was not ok: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error('Form submission failed');
                 }
                 return response.json();
             })
             .then(data => {
-                // Show success or error message based on response
-                showNotification(data.message || 'Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
                 form.reset();
             })
             .catch(error => {
                 console.error('Error:', error);
-                
-                // Try a backup approach - send to a simple webhook service
-                try {
-                    // This is a simple Discord webhook, you can replace with any webhook service
-                    fetch('https://discord.com/api/webhooks/1234567890/abcdefg', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            content: `New signup: ${email}`
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).catch(e => console.error('Backup webhook failed:', e));
-                } catch (e) {
-                    console.error('Backup webhook setup failed:', e);
-                }
-                
                 // Still show success message to user since we have the local storage fallback
                 showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
                 form.reset();
