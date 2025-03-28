@@ -3,8 +3,13 @@ frontend:
   phases:
     build:
       commands:
-        - echo "No build needed for static site"
+        - npm install
+        - cd netlify/functions/subscribe && npm install && cd ../../..
   artifacts:
     baseDirectory: /
     files:
       - "**/*"
+  cache:
+    paths:
+      - node_modules/**/*
+      - netlify/functions/subscribe/node_modules/**/*
