@@ -211,6 +211,7 @@
             text-align: center;
             max-width: 90%;
             word-break: break-word;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .notification.success {
@@ -249,88 +250,177 @@
             filter: brightness(1);
         }
 
+        /* Complete mobile layout overhaul */
         @media (max-width: 768px) {
+            /* Body and content flow */
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                padding-top: 60px; /* Space for navbar */
+                padding-bottom: 20px;
+                overflow-y: auto;
+            }
+            
+            /* Notification positioning */
+            .notification {
+                top: 70px;
+                width: 90%;
+            }
+            
+            /* Container layout changes */
+            .background-container {
+                position: relative;
+                top: 60px;
+                height: auto;
+                min-height: 40vh;
+                margin-bottom: 0;
+                align-items: center;
+                padding-top: 20px;
+                padding-bottom: 0;
+            }
+            
             .background-image {
-                max-width: 95%;
-                max-height: 80%; /* Reduce height on mobile */
+                max-width: 90%;
+                max-height: 40vh;
+                width: auto;
+                margin: 0 auto;
+                object-fit: contain;
             }
-            .nav-links {
-                gap: 10px;
+            
+            /* Navigation changes */
+            .nav-bar {
+                position: absolute;
+                width: 100%;
+                top: 0;
+                z-index: 10;
             }
-            .nav-links a {
-                font-size: 0.9rem;
-                padding: 5px 8px;
+            
+            /* Signup container changes */
+            .signup-container {
+                position: relative;
+                height: auto;
+                padding: 20px 15px;
+                margin-top: 60px;
+                background-color: rgba(15, 15, 15, 0.9);
+                width: 100%;
+                box-shadow: none;
             }
+            
+            .signup-content {
+                width: 100%;
+            }
+            
             .signup-form {
                 flex-direction: column;
                 gap: 10px;
-                width: 90%; /* Adjust width on mobile */
-                margin: 0 auto;
+                width: 90%;
+                margin: 0 auto 15px auto;
             }
+            
             .signup-form input,
             .signup-form button {
                 border-radius: 4px;
                 width: 100%;
+                padding: 15px;
             }
+            
+            .signup-form button {
+                margin-top: 5px;
+            }
+            
+            /* Social icons repositioning */
             .social-icons {
-                bottom: 15px;
-                right: 20px;
-                gap: 12px;
-            }
-            .social-icon {
-                width: 20px;
-                height: 20px;
-            }
-            .signup-container {
-                height: auto; /* Auto height instead of fixed on mobile */
-                padding: 15px 0;
-            }
-            .background-container {
-                height: calc(100vh - 120px); /* Adjust for auto height footer */
-                align-items: center; /* Center vertically on mobile */
+                position: relative;
+                bottom: auto;
+                right: auto;
+                justify-content: center;
+                margin: 30px auto 10px auto;
+                max-width: 100%;
+                width: 100%;
+                padding: 0 20px;
+                gap: 20px;
             }
         }
         
         /* Additional small screen media query */
         @media (max-width: 480px) {
-            .background-image {
-                max-width: 100%;
-                max-height: 70%;
+            .background-container {
+                min-height: 30vh;
             }
+            
+            .background-image {
+                width: 95%;
+                max-width: 95%;
+            }
+            
             .nav-logo {
                 font-size: 1.3rem;
             }
+            
             .signup-form {
-                width: 95%;
+                width: 100%;
             }
+            
             .notification {
                 width: 90%;
                 padding: 12px 15px;
                 font-size: 0.9rem;
             }
+            
             .social-icons {
-                right: 15px;
-                gap: 10px;
+                gap: 15px;
                 flex-wrap: wrap;
-                width: 120px;
-                justify-content: flex-end;
             }
+            
             .social-icon {
-                width: 18px;
-                height: 18px;
+                width: 22px;
+                height: 22px;
             }
         }
         
         /* Fix for very small screens */
         @media (max-height: 600px) {
+            .nav-bar {
+                height: 50px; /* Smaller navbar on very small screens */
+            }
+            
             .background-container {
-                height: calc(100vh - 110px);
+                min-height: 180px;
+                top: 50px;
+                padding-top: 10px;
+                margin-bottom: 10px;
             }
+            
             .background-image {
-                max-height: 60%;
+                max-height: 200px;
+                width: auto;
             }
+            
             .signup-container {
                 padding: 10px 0;
+                margin-top: 50px;
+            }
+            
+            .signup-form {
+                margin-bottom: 10px;
+            }
+            
+            .social-icons {
+                gap: 12px;
+                margin: 10px auto;
+            }
+            
+            .social-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        /* Override default fixed positioning on mobile */
+        @media (max-width: 768px) {
+            .nav-bar {
+                position: absolute;
             }
         }
     </style>
