@@ -296,6 +296,10 @@
                     <span class="button-text">Get Notified</span>
                     <span class="spinner"></span>
                 </button>
+                <!-- Add hidden honeypot field to prevent spam -->
+                <input type="text" name="_gotcha" style="display:none">
+                <!-- Add return URL so user stays on the site -->
+                <input type="hidden" name="_next" value="https://no-anime.d23jq8ipd3abc.amplifyapp.com/?submitted=true">
             </form>
         </div>
         <div class="social-icons">
@@ -351,21 +355,20 @@
             }, 5000);
         }
 
-        document.getElementById('email-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const form = this;
-            const input = form.querySelector('input[type="email"]');
-            const email = input.value;
-            const button = form.querySelector('button');
-            const buttonText = button.querySelector('.button-text');
-            const spinner = button.querySelector('.spinner');
-            
-            // Disable form while submitting
-            input.disabled = true;
-            button.disabled = true;
-            buttonText.style.opacity = '0';
-            spinner.style.display = 'block';
+        // Check for submitted parameter and show success message
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('submitted') === 'true') {
+                showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                // Remove the parameter from URL without refreshing the page
+                const newUrl = window.location.pathname;
+                history.pushState({}, document.title, newUrl);
+            }
+        });
+
+        // Store email in localStorage when form is submitted
+        document.getElementById('email-form').addEventListener('submit', function() {
+            const email = this.querySelector('input[type="email"]').value;
             
             // Store the email locally as a backup
             try {
@@ -378,53 +381,12 @@
                 console.log('Local storage fallback failed:', e);
             }
             
-            // Submit to Formspree using their API
-            const formData = new FormData(form);
-            console.log('Form action:', form.action);
-            console.log('Form method:', form.method);
-            console.log('Email being submitted:', email);
+            // Show a success message anyway (the form will navigate away but this is useful for local testing)
+            showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
             
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                console.log('Formspree response status:', response.status);
-                if (response.ok) {
-                    console.log('Formspree submission successful');
-                    showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
-                    form.reset();
-                } else {
-                    response.json().then(data => {
-                        if (data.error) {
-                            console.error('Formspree error:', data.error);
-                        }
-                        // Still show success since we have local storage backup
-                        showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
-                        form.reset();
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error submitting form:', error);
-                showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
-                form.reset();
-            })
-            .finally(() => {
-                // Re-enable the form
-                setTimeout(() => {
-                    input.disabled = false;
-                    button.disabled = false;
-                    buttonText.style.opacity = '1';
-                    spinner.style.display = 'none';
-                }, 1000);
-            });
+            // Let the form submit naturally to Formspree
+            // No preventDefault() here
         });
-
-        // No more hexagon animation code - completely removed for simplicity
     </script>
 </body>
 </html> 
