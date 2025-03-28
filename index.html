@@ -364,21 +364,40 @@
             buttonText.style.opacity = '0';
             spinner.style.display = 'block';
 
-            // Store the email locally (could be enhanced later with actual backend)
+            // Get the email value
             const email = input.value;
-            console.log('Email submitted:', email);
             
-            // Show success message
-            showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
-            form.reset();
-            
-            // Re-enable form
-            setTimeout(() => {
-                input.disabled = false;
-                button.disabled = false;
-                buttonText.style.opacity = '1';
-                spinner.style.display = 'none';
-            }, 1000);
+            // Submit to Netlify function
+            fetch('/.netlify/functions/subscribe', {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Show success or error message based on response
+                if (data.success) {
+                    showNotification(data.message, 'success');
+                    form.reset();
+                } else {
+                    showNotification(data.message || 'Something went wrong. Please try again.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Oops! Something went wrong. Please try again later.', 'error');
+            })
+            .finally(() => {
+                // Re-enable form
+                setTimeout(() => {
+                    input.disabled = false;
+                    button.disabled = false;
+                    buttonText.style.opacity = '1';
+                    spinner.style.display = 'none';
+                }, 1000);
+            });
         });
 
         // No more hexagon animation code - completely removed for simplicity

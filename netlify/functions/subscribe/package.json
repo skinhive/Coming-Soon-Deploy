@@ -1,0 +1,9 @@
+{
+  "name": "subscribe-function",
+  "version": "1.0.0",
+  "description": "Netlify function to subscribe users to Mailchimp",
+  "main": "subscribe.js",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+} 
