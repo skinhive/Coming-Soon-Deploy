@@ -1,15 +1,23 @@
 version: 1
 frontend:
   phases:
+    preBuild:
+      commands:
+        - echo "Installing dependencies..."
+        - npm install
     build:
       commands:
-        - npm install
-        - cd netlify/functions/subscribe && npm install && cd ../../..
+        - echo "Setting up Netlify functions..."
+        - mkdir -p .netlify/functions/subscribe
+        - cp -r netlify/functions/subscribe/* .netlify/functions/subscribe/
+        - cd .netlify/functions/subscribe && npm install && cd ../../..
+        - echo "Build completed"
   artifacts:
     baseDirectory: /
     files:
       - "**/*"
+      - ".netlify/**/*"
   cache:
     paths:
       - node_modules/**/*
-      - netlify/functions/subscribe/node_modules/**/*
+      - .netlify/functions/subscribe/node_modules/**/*
