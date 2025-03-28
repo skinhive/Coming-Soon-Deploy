@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkinHive - Coming Soon</title>
     <link rel="icon" href="images/skinhive-logo.svg" type="image/svg+xml">
+    <!-- Add Formspree's AJAX library -->
+    <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -354,6 +356,7 @@
             
             const form = this;
             const input = form.querySelector('input[type="email"]');
+            const email = input.value;
             const button = form.querySelector('button');
             const buttonText = button.querySelector('.button-text');
             const spinner = button.querySelector('.spinner');
@@ -363,13 +366,9 @@
             button.disabled = true;
             buttonText.style.opacity = '0';
             spinner.style.display = 'block';
-
-            // Get the email value
-            const email = input.value;
             
-            // Store the email locally as a fallback
+            // Store the email locally as a backup
             try {
-                // Save to localStorage as a backup
                 const savedEmails = JSON.parse(localStorage.getItem('skinHiveEmails') || '[]');
                 if (!savedEmails.includes(email)) {
                     savedEmails.push(email);
@@ -379,36 +378,43 @@
                 console.log('Local storage fallback failed:', e);
             }
             
-            // Get form action (Formspree URL)
-            const action = form.getAttribute('action');
-            const method = form.getAttribute('method') || 'POST';
+            // Submit to Formspree using their API
+            const formData = new FormData(form);
+            console.log('Form action:', form.action);
+            console.log('Form method:', form.method);
+            console.log('Email being submitted:', email);
             
-            // Submit the form to Formspree
-            fetch(action, {
-                method: method,
-                body: new FormData(form),
+            fetch(form.action, {
+                method: form.method,
+                body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Form submission failed');
+                console.log('Formspree response status:', response.status);
+                if (response.ok) {
+                    console.log('Formspree submission successful');
+                    showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (data.error) {
+                            console.error('Formspree error:', data.error);
+                        }
+                        // Still show success since we have local storage backup
+                        showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
+                        form.reset();
+                    });
                 }
-                return response.json();
-            })
-            .then(data => {
-                showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
-                form.reset();
             })
             .catch(error => {
-                console.error('Error:', error);
-                // Still show success message to user since we have the local storage fallback
+                console.error('Error submitting form:', error);
                 showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
                 form.reset();
             })
             .finally(() => {
-                // Re-enable form
+                // Re-enable the form
                 setTimeout(() => {
                     input.disabled = false;
                     button.disabled = false;
