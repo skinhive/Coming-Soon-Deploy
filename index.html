@@ -100,12 +100,12 @@
             bottom: 0; /* Align to bottom of container */
             left: 50%;
             transform: translateX(-50%); /* Center horizontally */
-            width: auto; 
-            height: 110%; /* Fill height with slight overflow */
-            max-width: unset;
-            max-height: unset;
-            object-fit: contain;
-            object-position: center bottom;
+            width: 100%; 
+            height: 100%; /* Exactly fill the container */
+            max-width: none;
+            max-height: none;
+            object-fit: cover;
+            object-position: center 35%;
         }
 
         .signup-container {
@@ -286,7 +286,7 @@
             .background-container {
                 position: relative;
                 top: 0;
-                height: calc(100vh - 45px - 165px); /* Viewport height minus navbar and signup container */
+                height: calc(100vh - 45px - 160px); /* Viewport height minus navbar and signup container */
                 min-height: unset;
                 max-height: unset;
                 margin-bottom: 0;
@@ -396,8 +396,10 @@
             }
         }
         
-        /* iPhone specific adjustments */
-        @media screen and (max-width: 430px) and (min-height: 800px) {
+        /* iPhone specific adjustments - tailored for iPhone 13/14 models */
+        @media screen and (device-width: 390px) and (device-height: 844px), 
+               screen and (device-width: 428px) and (device-height: 926px),
+               screen and (max-width: 430px) and (min-height: 800px) {
             body {
                 padding-top: 45px;
             }
@@ -407,11 +409,13 @@
             }
             
             .background-container {
-                height: calc(100vh - 45px - 180px); /* Adjust for taller signup area */
+                height: calc(100vh - 45px - 172px); /* Precise adjustment for iPhone 13/14 */
             }
             
             .background-image {
-                height: 108%; /* Slightly less zoom for taller phones */
+                height: 100%;
+                width: 100%;
+                object-position: center 38%;
             }
             
             .signup-container {
@@ -444,13 +448,14 @@
             }
             
             .background-container {
-                height: calc(100vh - 45px - 165px);
+                height: calc(100vh - 45px - 162px);
                 padding: 0;
                 overflow: hidden;
             }
             
             .background-image {
-                height: 105%;
+                height: 100%;
+                width: 100%;
             }
             
             .signup-form {
@@ -500,11 +505,13 @@
             }
             
             .background-container {
-                height: calc(100vh - 40px - 120px); /* Adjust for smaller navbar and signup area */
+                height: calc(100vh - 40px - 115px); /* Precise adjustment for landscape */
             }
             
             .background-image {
                 height: 100%;
+                width: 100%;
+                object-position: center 35%;
             }
             
             .signup-container {
@@ -548,11 +555,12 @@
             }
             
             .background-container {
-                height: calc(100vh - 45px - 160px);
+                height: calc(100vh - 45px - 152px);
             }
             
             .background-image {
-                height: 102%;
+                height: 100%;
+                width: 100%;
             }
             
             .social-icons {
@@ -562,6 +570,18 @@
             .social-icon {
                 width: 24px;
                 height: 24px;
+            }
+        }
+        
+        /* Specific adjustment for iPhone 13 Mini and similar */
+        @media screen and (device-width: 375px) and (device-height: 812px),
+               screen and (max-width: 380px) and (min-height: 800px) {
+            .background-container {
+                height: calc(100vh - 45px - 162px); /* Precise adjustment for smaller iPhones */
+            }
+            
+            .background-image {
+                object-position: center 40%;
             }
         }
         
