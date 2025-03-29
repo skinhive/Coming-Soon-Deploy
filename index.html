@@ -81,31 +81,29 @@
         }
 
         .background-container {
-            position: relative;
-            top: 0;
-            height: calc(100vh - 45px - 165px); /* Viewport height minus navbar and signup container */
-            flex: 1;
-            min-height: unset;
-            max-height: unset;
-            margin-bottom: 0;
-            align-items: center;
+            position: absolute;
+            top: 45px; /* Position exactly below navbar */
+            bottom: 160px; /* Position exactly above email container */
+            left: 0;
+            right: 0;
+            height: auto; /* Let height be determined by top/bottom */
+            margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
+            align-items: center;
             overflow: hidden;
+            z-index: 1;
         }
 
         .background-image {
-            position: absolute;
-            bottom: 0; /* Align to bottom of container */
-            left: 50%;
-            transform: translateX(-50%); /* Center horizontally */
-            width: 100%; 
-            height: 100%; /* Exactly fill the container */
+            width: 150%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
             max-width: none;
             max-height: none;
-            object-fit: cover;
-            object-position: center 35%;
+            display: block;
         }
 
         .signup-container {
@@ -411,9 +409,9 @@
             }
             
             .background-image {
-                height: 100%;
-                width: 100%;
-                object-position: center 38%;
+                object-position: center center;
+                width: 150%; /* Make image wider than container to fill screen */
+                max-width: none;
             }
             
             .signup-container {
@@ -451,8 +449,8 @@
             }
             
             .background-image {
-                height: 100%;
-                width: 100%;
+                width: 140%; /* Make image wider for smaller screens */
+                max-width: none;
             }
             
             .signup-form {
@@ -507,7 +505,8 @@
             }
             
             .background-image {
-                object-position: center 40%;
+                object-position: center 45%;
+                width: 120%;
             }
             
             .signup-container {
@@ -556,8 +555,8 @@
             }
             
             .background-image {
-                height: 100%;
-                width: 100%;
+                width: 160%; /* Even wider for very small screens */
+                max-width: none;
             }
             
             .social-icons {
