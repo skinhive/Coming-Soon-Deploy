@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>SkinHive - Coming Soon</title>
     <link rel="icon" href="images/skinhive-logo.svg" type="image/svg+xml">
     <!-- Add Formspree's AJAX library -->
@@ -153,6 +153,7 @@
         .signup-form input:focus {
             outline: none;
             background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.5);
         }
 
         .signup-form button {
@@ -169,6 +170,11 @@
             -webkit-appearance: none; /* Fix for iOS styling */
             appearance: none;
             -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+        }
+        
+        .signup-form button:active {
+            transform: scale(0.98);
+            background: linear-gradient(45deg, #ffc700, #ff9900);
         }
 
         .signup-form button:disabled {
@@ -258,31 +264,33 @@
                 flex-direction: column;
                 min-height: 100vh;
                 padding-top: 60px; /* Space for navbar */
-                padding-bottom: 20px;
+                padding-bottom: 0;
                 overflow-y: auto;
+                overflow-x: hidden;
             }
             
             /* Notification positioning */
             .notification {
                 top: 70px;
                 width: 90%;
+                font-size: 0.95rem;
+                padding: 12px 15px;
             }
             
             /* Container layout changes */
             .background-container {
                 position: relative;
-                top: 60px;
+                top: 0;
                 height: auto;
-                min-height: 40vh;
+                min-height: 45vh;
                 margin-bottom: 0;
                 align-items: center;
-                padding-top: 20px;
-                padding-bottom: 0;
+                padding: 10px 0 15px 0;
             }
             
             .background-image {
-                max-width: 90%;
-                max-height: 40vh;
+                max-width: 95%;
+                max-height: 45vh;
                 width: auto;
                 margin: 0 auto;
                 object-fit: contain;
@@ -290,21 +298,27 @@
             
             /* Navigation changes */
             .nav-bar {
-                position: absolute;
+                position: fixed;
                 width: 100%;
                 top: 0;
                 z-index: 10;
+                height: 55px;
+            }
+            
+            .nav-logo {
+                font-size: 1.4rem;
+                letter-spacing: 1.5px;
             }
             
             /* Signup container changes */
             .signup-container {
                 position: relative;
                 height: auto;
-                padding: 20px 15px;
-                margin-top: 60px;
-                background-color: rgba(15, 15, 15, 0.9);
+                padding: 20px 15px 15px;
+                margin-top: 0;
+                background-color: rgba(15, 15, 15, 0.95);
                 width: 100%;
-                box-shadow: none;
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
             }
             
             .signup-content {
@@ -314,19 +328,26 @@
             .signup-form {
                 flex-direction: column;
                 gap: 10px;
-                width: 90%;
-                margin: 0 auto 15px auto;
+                width: 92%;
+                margin: 0 auto 12px auto;
             }
             
-            .signup-form input,
-            .signup-form button {
-                border-radius: 4px;
+            .signup-form input {
+                border-radius: 6px;
                 width: 100%;
-                padding: 15px;
+                padding: 14px;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+                height: 50px;
             }
             
             .signup-form button {
+                border-radius: 6px;
+                width: 100%;
+                padding: 14px;
                 margin-top: 5px;
+                font-size: 16px;
+                height: 50px;
+                font-weight: 600;
             }
             
             /* Social icons repositioning */
@@ -335,42 +356,126 @@
                 bottom: auto;
                 right: auto;
                 justify-content: center;
-                margin: 30px auto 10px auto;
+                margin: 20px auto 5px auto;
                 max-width: 100%;
                 width: 100%;
-                padding: 0 20px;
-                gap: 20px;
+                padding: 0;
+                gap: 24px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .social-icon {
+                width: 28px;
+                height: 28px;
             }
         }
         
         /* Additional small screen media query */
         @media (max-width: 480px) {
-            .background-container {
-                min-height: 30vh;
+            body {
+                padding-top: 50px;
             }
             
-            .background-image {
-                width: 95%;
-                max-width: 95%;
+            .nav-bar {
+                height: 50px;
             }
             
             .nav-logo {
                 font-size: 1.3rem;
             }
             
+            .background-container {
+                min-height: 35vh;
+                padding: 5px 0 10px 0;
+            }
+            
+            .background-image {
+                width: 92%;
+                max-width: 92%;
+                max-height: 40vh;
+            }
+            
             .signup-form {
-                width: 100%;
+                width: 92%;
+            }
+            
+            .signup-form input,
+            .signup-form button {
+                padding: 12px;
+                height: 46px;
             }
             
             .notification {
-                width: 90%;
-                padding: 12px 15px;
+                width: 92%;
+                padding: 10px 12px;
                 font-size: 0.9rem;
+                top: 60px;
             }
             
             .social-icons {
-                gap: 15px;
-                flex-wrap: wrap;
+                gap: 20px;
+                margin-top: 15px;
+                margin-bottom: 5px;
+            }
+            
+            .social-icon {
+                width: 26px;
+                height: 26px;
+            }
+            
+            .signup-container {
+                padding: 15px 10px 10px;
+            }
+        }
+        
+        /* Fix for very small screens */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .nav-bar {
+                height: 45px; /* Even smaller navbar on landscape small screens */
+            }
+            
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+            
+            .background-container {
+                min-height: 120px;
+                padding-top: 5px;
+                margin-bottom: 0;
+            }
+            
+            .background-image {
+                max-height: 160px;
+                max-width: 80%;
+            }
+            
+            .signup-container {
+                padding: 10px 0;
+            }
+            
+            .signup-form {
+                margin-bottom: 5px;
+                flex-direction: row;
+                gap: 5px;
+            }
+            
+            .signup-form input,
+            .signup-form button {
+                height: 40px;
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            
+            .signup-form button {
+                margin-top: 0;
+                width: auto;
+                white-space: nowrap;
+            }
+            
+            .social-icons {
+                gap: 14px;
+                margin: 5px auto;
             }
             
             .social-icon {
@@ -379,48 +484,30 @@
             }
         }
         
-        /* Fix for very small screens */
-        @media (max-height: 600px) {
-            .nav-bar {
-                height: 50px; /* Smaller navbar on very small screens */
+        /* iPhone SE and other very small devices */
+        @media (max-width: 375px) {
+            .nav-logo {
+                font-size: 1.2rem;
             }
             
             .background-container {
-                min-height: 180px;
-                top: 50px;
-                padding-top: 10px;
-                margin-bottom: 10px;
-            }
-            
-            .background-image {
-                max-height: 200px;
-                width: auto;
-            }
-            
-            .signup-container {
-                padding: 10px 0;
-                margin-top: 50px;
-            }
-            
-            .signup-form {
-                margin-bottom: 10px;
+                min-height: 30vh;
             }
             
             .social-icons {
-                gap: 12px;
-                margin: 10px auto;
+                gap: 16px;
             }
             
             .social-icon {
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
             }
         }
         
-        /* Override default fixed positioning on mobile */
-        @media (max-width: 768px) {
-            .nav-bar {
-                position: absolute;
+        /* Fix for notched phones like iPhone X and newer */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .signup-container {
+                padding-bottom: calc(15px + env(safe-area-inset-bottom));
             }
         }
     </style>
@@ -443,7 +530,7 @@
     <div class="signup-container">
         <div class="signup-content">
             <form class="signup-form" id="email-form" action="https://formspree.io/f/xblgaglq" method="POST">
-                <input type="email" name="email" placeholder="Enter your email to be first in the HIVE" required>
+                <input type="email" name="email" placeholder="Enter your email for HIVE updates" required autocomplete="email" autocapitalize="off">
                 <button type="submit">
                     <span class="button-text">Get Notified</span>
                     <span class="spinner"></span>
@@ -516,11 +603,26 @@
                 const newUrl = window.location.pathname;
                 history.pushState({}, document.title, newUrl);
             }
+            
+            // Add focus styles for mobile
+            const emailInput = document.querySelector('input[type="email"]');
+            if (emailInput) {
+                emailInput.addEventListener('focus', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                });
+                emailInput.addEventListener('blur', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                });
+            }
         });
 
         // Store email in localStorage when form is submitted
-        document.getElementById('email-form').addEventListener('submit', function() {
-            const email = this.querySelector('input[type="email"]').value;
+        document.getElementById('email-form').addEventListener('submit', function(e) {
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            const submitButton = this.querySelector('button[type="submit"]');
+            const buttonText = submitButton.querySelector('.button-text');
+            const spinner = submitButton.querySelector('.spinner');
             
             // Store the email locally as a backup
             try {
@@ -532,6 +634,13 @@
             } catch (e) {
                 console.log('Local storage fallback failed:', e);
             }
+            
+            // Show loading state
+            buttonText.style.visibility = 'hidden';
+            spinner.style.display = 'block';
+            
+            // Disable focus on input to prevent keyboard from staying open on mobile
+            emailInput.blur();
             
             // Show a success message anyway (the form will navigate away but this is useful for local testing)
             showNotification('Thank you for joining the HIVE! We will notify you when we launch.', 'success');
