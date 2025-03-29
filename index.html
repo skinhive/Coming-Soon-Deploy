@@ -264,7 +264,7 @@
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
-                padding-top: 50px; /* Reduced space for navbar */
+                padding-top: 45px; /* Match navbar height */
                 padding-bottom: 0;
                 overflow-y: auto;
                 overflow-x: hidden;
@@ -272,7 +272,7 @@
             
             /* Notification positioning */
             .notification {
-                top: 60px;
+                top: 55px;
                 width: 90%;
                 font-size: 0.95rem;
                 padding: 12px 15px;
@@ -283,20 +283,27 @@
                 position: relative;
                 top: 0;
                 height: auto;
-                min-height: 55vh; /* Increased to show more of the image */
-                max-height: 65vh;
+                min-height: 60vh; /* Increased to fill more of the screen */
+                max-height: 70vh;
                 margin-bottom: 0;
-                align-items: center;
+                align-items: flex-start; /* Align to top to match honey with navbar */
                 padding: 0;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
             }
             
             .background-image {
                 max-width: 100%;
-                max-height: 55vh;
-                width: auto;
+                max-height: none; /* Remove max-height constraint */
+                width: 100%; /* Fill width */
+                height: auto;
                 margin: 0 auto;
-                object-fit: contain;
-                object-position: center center;
+                object-fit: cover;
+                object-position: center top; /* Align to top */
+                display: block;
+                transform: scale(1.1); /* Slightly enlarge to fill better */
+                margin-top: -10px; /* Pull up slightly to align honey with top bar */
             }
             
             /* Navigation changes */
@@ -389,13 +396,13 @@
             }
             
             .background-container {
-                min-height: 45vh;
-                max-height: 50vh;
+                min-height: 55vh;
+                max-height: 65vh;
             }
             
             .background-image {
-                max-height: 45vh;
-                margin-top: 10px;
+                transform: scale(1.15);
+                margin-top: -15px; /* Pull up slightly more on taller iPhones */
             }
             
             .signup-container {
@@ -428,14 +435,16 @@
             }
             
             .background-container {
-                min-height: 40vh;
+                min-height: 50vh;
                 padding: 0;
+                overflow: hidden;
             }
             
             .background-image {
                 width: 100%;
                 max-width: 100%;
-                max-height: 45vh;
+                transform: scale(1.12);
+                margin-top: -12px;
             }
             
             .signup-form {
@@ -474,26 +483,33 @@
         /* Fix for very small screens */
         @media (max-height: 600px) and (orientation: landscape) {
             .nav-bar {
-                height: 45px; /* Even smaller navbar on landscape small screens */
+                height: 40px; /* Smaller navbar on landscape small screens */
+            }
+            
+            body {
+                padding-top: 40px;
             }
             
             .nav-logo {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             
             .background-container {
-                min-height: 120px;
-                padding-top: 5px;
+                min-height: 200px;
+                padding: 0;
                 margin-bottom: 0;
+                max-height: 60vh;
             }
             
             .background-image {
-                max-height: 160px;
-                max-width: 80%;
+                max-width: 90%;
+                transform: scale(1.05);
+                margin-top: -8px;
             }
             
             .signup-container {
                 padding: 10px 0;
+                position: relative;
             }
             
             .signup-form {
@@ -516,13 +532,13 @@
             }
             
             .social-icons {
-                gap: 14px;
-                margin: 5px auto;
+                gap: 18px;
+                margin: 8px auto;
             }
             
             .social-icon {
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
             }
         }
         
