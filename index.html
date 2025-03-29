@@ -81,28 +81,26 @@
         }
 
         .background-container {
-            position: fixed;
-            top: 60px; /* Equal to nav-bar height */
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 140px); /* Full viewport height minus nav height and signup height */
-            z-index: 2;
+            position: relative;
+            top: 0;
+            height: auto;
+            min-height: 55vh; /* Increased to show more of the image */
+            max-height: 65vh;
+            margin-bottom: 0;
+            align-items: center;
+            padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Align to bottom of container */
-            padding-bottom: 0;
         }
 
         .background-image {
+            max-width: 100%;
+            max-height: 55vh;
             width: auto;
-            height: auto;
-            max-height: 100%;
-            max-width: 90%;
+            margin: 0 auto;
             object-fit: contain;
-            opacity: 1;
-            z-index: 2;
-            object-position: center bottom;
-            position: relative; /* Add this to create a new stacking context */
+            object-position: center center;
+            display: block;
         }
 
         .signup-container {
@@ -233,15 +231,18 @@
         }
 
         .social-icons {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
+            position: relative;
+            bottom: auto;
+            right: auto;
+            justify-content: center;
+            margin: 20px auto 10px auto;
+            max-width: 100%;
+            width: 100%;
+            padding: 0;
+            gap: 32px; /* Increased spacing between icons */
             display: flex;
-            gap: 15px;
-            z-index: 10;
             flex-wrap: wrap;
-            justify-content: flex-end;
-            max-width: 300px;
+            align-items: center;
         }
 
         .social-icon {
@@ -263,7 +264,7 @@
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
-                padding-top: 60px; /* Space for navbar */
+                padding-top: 50px; /* Reduced space for navbar */
                 padding-bottom: 0;
                 overflow-y: auto;
                 overflow-x: hidden;
@@ -271,7 +272,7 @@
             
             /* Notification positioning */
             .notification {
-                top: 70px;
+                top: 60px;
                 width: 90%;
                 font-size: 0.95rem;
                 padding: 12px 15px;
@@ -282,18 +283,20 @@
                 position: relative;
                 top: 0;
                 height: auto;
-                min-height: 45vh;
+                min-height: 55vh; /* Increased to show more of the image */
+                max-height: 65vh;
                 margin-bottom: 0;
                 align-items: center;
-                padding: 10px 0 15px 0;
+                padding: 0;
             }
             
             .background-image {
-                max-width: 95%;
-                max-height: 45vh;
+                max-width: 100%;
+                max-height: 55vh;
                 width: auto;
                 margin: 0 auto;
                 object-fit: contain;
+                object-position: center center;
             }
             
             /* Navigation changes */
@@ -302,11 +305,12 @@
                 width: 100%;
                 top: 0;
                 z-index: 10;
-                height: 55px;
+                height: 50px; /* Reduced height */
+                padding: 0;
             }
             
             .nav-logo {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
                 letter-spacing: 1.5px;
             }
             
@@ -314,7 +318,7 @@
             .signup-container {
                 position: relative;
                 height: auto;
-                padding: 20px 15px 15px;
+                padding: 20px 15px 25px;
                 margin-top: 0;
                 background-color: rgba(15, 15, 15, 0.95);
                 width: 100%;
@@ -327,27 +331,29 @@
             
             .signup-form {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
                 width: 92%;
-                margin: 0 auto 12px auto;
+                margin: 0 auto 15px auto;
             }
             
             .signup-form input {
-                border-radius: 6px;
+                border-radius: 8px;
                 width: 100%;
-                padding: 14px;
+                padding: 14px 16px;
                 font-size: 16px; /* Prevents iOS zoom on focus */
                 height: 50px;
+                background-color: rgba(255, 255, 255, 0.15);
             }
             
             .signup-form button {
-                border-radius: 6px;
+                border-radius: 8px;
                 width: 100%;
                 padding: 14px;
-                margin-top: 5px;
+                margin-top: 0;
                 font-size: 16px;
                 height: 50px;
                 font-weight: 600;
+                background: linear-gradient(90deg, #ffdc00, #ffaa00);
             }
             
             /* Social icons repositioning */
@@ -356,11 +362,11 @@
                 bottom: auto;
                 right: auto;
                 justify-content: center;
-                margin: 20px auto 5px auto;
+                margin: 20px auto 10px auto;
                 max-width: 100%;
                 width: 100%;
                 padding: 0;
-                gap: 24px;
+                gap: 32px; /* Increased spacing between icons */
                 display: flex;
                 flex-wrap: wrap;
             }
@@ -368,64 +374,100 @@
             .social-icon {
                 width: 28px;
                 height: 28px;
+                filter: brightness(1); /* Make icons brighter by default */
+            }
+        }
+        
+        /* iPhone specific adjustments */
+        @media screen and (max-width: 430px) and (min-height: 800px) {
+            body {
+                padding-top: 45px;
+            }
+            
+            .nav-bar {
+                height: 45px;
+            }
+            
+            .background-container {
+                min-height: 45vh;
+                max-height: 50vh;
+            }
+            
+            .background-image {
+                max-height: 45vh;
+                margin-top: 10px;
+            }
+            
+            .signup-container {
+                padding: 20px 15px 30px;
+            }
+            
+            .social-icons {
+                margin-top: 15px;
+                gap: 35px;
+            }
+            
+            .social-icon {
+                width: 30px;
+                height: 30px;
             }
         }
         
         /* Additional small screen media query */
         @media (max-width: 480px) {
             body {
-                padding-top: 50px;
+                padding-top: 45px;
             }
             
             .nav-bar {
-                height: 50px;
+                height: 45px;
             }
             
             .nav-logo {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
             
             .background-container {
-                min-height: 35vh;
-                padding: 5px 0 10px 0;
+                min-height: 40vh;
+                padding: 0;
             }
             
             .background-image {
-                width: 92%;
-                max-width: 92%;
-                max-height: 40vh;
+                width: 100%;
+                max-width: 100%;
+                max-height: 45vh;
             }
             
             .signup-form {
-                width: 92%;
+                width: 94%;
             }
             
             .signup-form input,
             .signup-form button {
-                padding: 12px;
-                height: 46px;
+                padding: 13px;
+                height: 48px;
             }
             
             .notification {
                 width: 92%;
                 padding: 10px 12px;
                 font-size: 0.9rem;
-                top: 60px;
+                top: 55px;
             }
             
             .social-icons {
-                gap: 20px;
+                gap: 25px;
                 margin-top: 15px;
                 margin-bottom: 5px;
             }
             
             .social-icon {
-                width: 26px;
-                height: 26px;
+                width: 28px;
+                height: 28px;
             }
             
             .signup-container {
-                padding: 15px 10px 10px;
+                padding: 20px 10px 25px;
             }
         }
         
