@@ -97,8 +97,8 @@
         }
 
         .background-image {
-            width: 150%;
-            height: 100%;
+            min-width: 200%; /* Force image to be wider than screen */
+            height: 120%; /* Ensure image fills height with some overflow */
             object-fit: cover;
             object-position: center center;
             max-width: none;
@@ -261,14 +261,22 @@
         /* Complete mobile layout overhaul */
         @media (max-width: 768px) {
             /* Body and content flow */
+            html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            
             body {
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh;
+                height: 100vh;
                 padding-top: 45px; /* Match navbar height */
                 padding-bottom: 0;
-                overflow-y: auto;
-                overflow-x: hidden;
+                overflow: hidden;
                 position: relative;
             }
             
@@ -294,15 +302,17 @@
                 justify-content: center;
                 align-items: center;
                 overflow: hidden;
+                z-index: 1;
             }
             
             .background-image {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
+                min-width: 200%; /* Force image to be wider than screen */
+                height: auto;
+                object-fit: cover;
                 object-position: center center;
                 max-width: none;
                 max-height: none;
+                display: block;
             }
             
             /* Navigation changes */
@@ -397,6 +407,7 @@
                screen and (max-width: 430px) and (min-height: 800px) {
             body {
                 padding-top: 45px;
+                overflow: hidden;
             }
             
             .nav-bar {
@@ -409,9 +420,8 @@
             }
             
             .background-image {
-                object-position: center center;
-                width: 150%; /* Make image wider than container to fill screen */
-                max-width: none;
+                min-width: 200%;
+                height: auto;
             }
             
             .signup-container {
@@ -433,6 +443,7 @@
         @media (max-width: 480px) {
             body {
                 padding-top: 45px;
+                overflow: hidden;
             }
             
             .nav-bar {
@@ -449,8 +460,8 @@
             }
             
             .background-image {
-                width: 140%; /* Make image wider for smaller screens */
-                max-width: none;
+                min-width: 180%;
+                height: auto;
             }
             
             .signup-form {
@@ -487,12 +498,17 @@
         
         /* Fix for very small screens */
         @media (max-height: 600px) and (orientation: landscape) {
-            .nav-bar {
-                height: 40px;
+            html, body {
+                overflow: hidden;
             }
             
             body {
                 padding-top: 40px;
+                overflow: hidden;
+            }
+            
+            .nav-bar {
+                height: 40px;
             }
             
             .nav-logo {
@@ -505,8 +521,8 @@
             }
             
             .background-image {
-                object-position: center 45%;
-                width: 120%;
+                min-width: 150%;
+                height: 120%;
             }
             
             .signup-container {
@@ -555,8 +571,8 @@
             }
             
             .background-image {
-                width: 160%; /* Even wider for very small screens */
-                max-width: none;
+                min-width: 250%; /* Even wider for very small screens */
+                height: 120%;
             }
             
             .social-icons {
@@ -578,7 +594,16 @@
             }
             
             .background-image {
-                object-position: center 40%;
+                min-width: 220%;
+                height: 120%;
+            }
+        }
+        
+        /* iPhone landscape mode */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .background-image {
+                min-width: 140%;
+                height: 130%;
             }
         }
         
